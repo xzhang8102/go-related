@@ -1,12 +1,11 @@
-# bufio
+# bufio.Writer
 ref: https://medium.com/golangspec/introduction-to-bufio-package-in-golang-ad7d1877f762
-## bufio.Writer
 source: https://github.com/golang/go/blob/master/src/bufio/bufio.go
-### workflow:
+## workflow:
 ```
 data producer --> buffer --> io.Writer
 ```
-### Definition
+## Definition
 ```go
 type Writer struct {
 	err error      // held the error during writing, further ops are ignored
@@ -15,14 +14,14 @@ type Writer struct {
 	wr  io.Writer  // underlying writer
 }
 ```
-### APIs
-#### Constructor
+## APIs
+### Constructor
 ```go
 // w - io.Writer
 bufio.NewWriter(os.Stdout)  // default buffer size: 4096
 bufio.NewWriterSize(os.Stdout, 4)
 ```
-#### `Reset`
+### `Reset`
 ```go
 // re-used buffer writer for different io.Writer
 bw.Reset(w) // feed with a new io.Writer
@@ -37,17 +36,17 @@ func (b *Writer) Reset(w io.Writer) {
 	b.wr = w
 }
 ```
-#### `Available`
+### `Available`
 ```go
 bw.Available() // return the left space in buffer
 ```
-#### Write{Byte,Rune,String}
+### Write{Byte,Rune,String}
 ```go
 bw.WriteByte('a')
 bw.WriteRune('我')
 bw.WriteString("golang")
 ```
-#### `ReadFrom`
+### `ReadFrom`
 ```go
 // implement io.ReaderFrom interface
 type ReaderFrom interface {
@@ -62,6 +61,6 @@ if err != nil {
 	panic(err)
 }
 ```
-### Tips
+## Tips
 1. Remember to call the `Flush` method to guarantee all data has be forwarded to the underlying `io.Writer`
 2. If the size of the data is larger than the buffer size, the data goes directly to the `io.Writer`
