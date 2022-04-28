@@ -22,7 +22,7 @@ type Writer struct {
 bufio.NewWriter(os.Stdout)  // default buffer size: 4096
 bufio.NewWriterSize(os.Stdout, 4)
 ```
-#### Reset
+#### `Reset`
 ```go
 // re-used buffer writer for different io.Writer
 bw.Reset(w) // feed with a new io.Writer
@@ -37,7 +37,7 @@ func (b *Writer) Reset(w io.Writer) {
 	b.wr = w
 }
 ```
-#### Available
+#### `Available`
 ```go
 bw.Available() // return the left space in buffer
 ```
@@ -47,7 +47,7 @@ bw.WriteByte('a')
 bw.WriteRune('我')
 bw.WriteString("golang")
 ```
-#### ReadFrom
+#### `ReadFrom`
 ```go
 // implement io.ReaderFrom interface
 type ReaderFrom interface {
