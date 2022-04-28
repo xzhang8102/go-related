@@ -1,6 +1,6 @@
 # bufio.Writer
-ref: https://medium.com/golangspec/introduction-to-bufio-package-in-golang-ad7d1877f762
-source: https://github.com/golang/go/blob/master/src/bufio/bufio.go
+ref: https://medium.com/golangspec/introduction-to-bufio-package-in-golang-ad7d1877f762  
+source code: https://github.com/golang/go/blob/master/src/bufio/bufio.go
 ## workflow:
 ```
 data producer --> buffer --> io.Writer
@@ -15,7 +15,7 @@ type Writer struct {
 }
 ```
 ## APIs
-### Constructor
+### Creation
 ```go
 // w - io.Writer
 bufio.NewWriter(os.Stdout)  // default buffer size: 4096
@@ -40,8 +40,9 @@ func (b *Writer) Reset(w io.Writer) {
 ```go
 bw.Available() // return the left space in buffer
 ```
-### Write{Byte,Rune,String}
+### Write{,Byte,Rune,String}
 ```go
+bw.Write([]byte{'g','o'})
 bw.WriteByte('a')
 bw.WriteRune('我')
 bw.WriteString("golang")
